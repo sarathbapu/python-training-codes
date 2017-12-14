@@ -12,12 +12,15 @@ import platform
 from _ast import excepthandler
 
 def find_file(root_folder, rex):
+    result = {}     # Results dictionary 
+    i = 0           #Count for Dictionary
     for root,dirs,files in os.walk(root_folder):
         for f in files:
             result = rex.search(f)
             if result:
                 a = os.path.join(root,f)
                 print ("Found at this location ", a) 
+                
                 print("Do you want to open [ y ]") 
                 c = input()
                 if c.lower() == 'y' :
