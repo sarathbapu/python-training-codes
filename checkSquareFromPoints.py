@@ -31,18 +31,32 @@ class Point :
     def distanceSquare(self, point) :
         return ((self.x - point.x)**2) + ((self.y - point.y)**2)
 
+    
+'''
+main Check square code
+Returns true, if all conditions set for a square are met as true
+'''
 def checkSquare(p1, p2, p3, p4):
     
     return (checkSides(p1, p2, p3, p4) and checkDiagonals(p1, p2, p3, p4) 
             and checkRightAngles(p1, p2, p3, p4))
 
+'''
+Returns true, if all sides are equal
+'''
 def checkSides(p1, p2, p3, p4) :
     side = p1.distance(p2)
     return side == p2.distance(p3) and side == p3.distance(p4) and side == p4.distance(p1)
     
+'''
+Returns if diagonals are equal
+'''
 def checkDiagonals(p1, p2, p3, p4) :
     return p1.distance(p3) == p2.distance(p4)
     
+'''
+Checks if the three points form a right angle using Pythagoran theorem
+'''
 def checkRightAngles(p1, p2, p3, p4):
     return (p1.distanceSquare(p3) == 2 * p1.distanceSquare(p2) 
             and p2.distanceSquare(p4) == 2 * p1.distanceSquare(p2))
