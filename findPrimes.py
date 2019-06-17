@@ -16,7 +16,10 @@ def is_prime(x):
     return True
     
 #Driver Program
-lower, upper = map(int, input().split())
-for i in range(lower, upper) :
+# lower and upper limits
+l, u = map(int, input().split())
+#Step 
+s = 1 if l < u else -1 
+for i in range(l, u, s) :
     if is_prime(i) :
         print(i)
