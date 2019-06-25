@@ -1,0 +1,310 @@
+# -*- coding: utf-8 -*-
+import random
+
+
+def x_power_y(x, y):
+    res = 1.0
+    if y < 0:
+        y *= -1
+        for _ in range(y):
+            res /= x
+    else:
+        for _ in range(y):
+            res *= x
+    return res
+
+
+def x_pow_y(x, y):
+    return x ** y
+
+
+def findSquareRoot(x):
+    """
+        Returns nearest integer to the square root
+    """
+    if (x == 0 or x == 1):
+        return x
+    i = 1
+    while x >= i*i:
+        i += 1
+    return i-1 if (x - ((i-1)*(i-1))) < (i*i)-x else i
+
+
+def distance(pt1, pt2):
+    dis = (((pt1[0] - pt2[0]) ** 2) + ((pt1[1] - pt2[1]) ** 2)) ** 0.5
+    return (int)((dis // 1) if (dis - (dis // 1)) < 0.5 else ((dis // 1) + 1))
+
+
+def sub_array_sum():
+    for testcase in range(int(input())):
+        flag = False
+        n, s = map(int, input().split())
+        arr = list(map(int, input().split()))
+        for i in range(n):
+            for k in range(i, n):
+                if sum(arr[i:k]) == s:
+                    print(i+1, ' ', k)
+                    flag = True
+                if flag:
+                    break
+            if flag:
+                break
+        if not flag:
+            print('-1')
+
+
+def maxsubarray():
+    for testcase in range(int(input())):
+        n = int(input())
+        arr = list(map(int, input().split()))
+        max = -1e7
+        for i in range(n):
+            for k in range(i+1, n+1):
+                s = sum(arr[i:k])
+                max = s if s > max else max
+        print(max)
+
+
+def sort0s1s2s():
+    for _ in range(int(input())):
+        n = int(input())
+        arr = list(map(int, input().split()))
+        n0 = n1 = n2 = 0
+        for num in arr:
+            if num == 0:
+                n0 += 1
+            elif num == 1:
+                n1 += 1
+            elif num == 2:
+                n2 += 1
+            else:
+                print('Wrong Input Params')
+        for i in range(n0):
+            print('0', end=' ')
+        for i in range(n1):
+            print('1', end=' ')
+        for i in range(n2):
+            print('2', end=' ')
+        print('')
+
+
+def mindiff():
+    for _ in range(int(input())):
+        n = int(input())
+        arr = sorted(list(map(int, input().split())))
+        m = int(input())
+        mini = max(arr)
+        for i in range(n-m):
+            s = arr[i+m-1] - arr[i]
+            mini = s if s < mini else mini
+        print(mini)
+
+
+def pythog_triplet():
+    for _ in range(int(input())):
+        n = int(input())
+        arr = list(map(int, input().split()))
+        sq_arr = [i*i for i in arr]
+        flag = False
+        for i in range(n):
+            for k in range(i+1, n):
+                if (sq_arr[i] + sq_arr[k]) in sq_arr:
+                    flag = True
+                if flag:
+                    break
+            if flag:
+                break
+        print('Yes' if flag else 'No')
+
+
+def trappedwater():
+    for _ in range(int(input())):
+        n = int(input())
+        arr = list(map(int, input().split()))
+
+        base = min(arr[0], arr[n-1])
+
+        updated_arr = [base-i for i in arr]
+
+        res = 0
+
+        for i in updated_arr:
+            res += i if i > 0 else 0
+
+        print(res)
+
+
+class Dice:
+    def roll():
+        return random.randint(1, 6), random.randint(1, 6)
+
+
+def mindiffpair():
+    for _ in range(int(input())):
+        n = int(input())
+        arr = sorted(list(map(int, input().split())))
+
+        ans = min([arr[i]-arr[i-1] for i in range(1, n)])
+        print(ans)
+
+
+def howmanyx():
+    for _ in range(int(input())):
+        digitx = input()
+        l, u = map(int, input().split())
+        s = ""
+        for i in range(l+1, u):
+            s += str(i)
+        print(s.count(digitx))
+
+
+def maxmoney():
+    for _ in range(int(input())):
+        n, s = map(int, input().split())
+        m = n // 2 if n % 2 == 0 else n//2 + 1
+        print(m * s)
+
+
+def validate_card_number(cardnumber):
+    """
+    lahns algorithm
+    """
+    evendigitflag = False
+    s = 0
+    for digit in cardnumber[::-1]:
+        x = int(digit)
+        if evendigitflag:
+            x *= 2
+        s += x % 10
+        s += x // 10
+
+        evendigitflag = not evendigitflag
+    return s % 10 == 0
+
+
+def check_cards():
+    l = ['864720030415440', '864720030815441', '4343025002212541',
+         '4343025002212542']
+    for i in l:
+        if validate_card_number(i):
+            print(i + ' - Valid Card')
+        else:
+            print(i + ' - Invalid Card')
+
+
+def strandpatt():
+    for _ in range(int(input())):
+        s = input()
+        patt = input()
+
+        res = None
+        for c in s:
+            if c in patt:
+                res = c
+                break
+
+        print(res if res is not None else 'No character present')
+
+def getfactors(n, factors=None):
+
+    if factors is None:
+        factors = []
+
+    if n == 1:
+        return factors
+    elif n == 2:
+        factors.append(2)
+        return factors
+
+    for i in range(2, n+1):
+        if n % i == 0:
+            factors.append(i)
+            getfactors(n // i, factors)
+            break
+    return factors
+
+def check_is_x_pow_y():
+    for _ in range(int(input())):
+        s = int(input())
+
+        flist = getfactors(s)
+
+        if(flist.count(flist[0]) == len(flist) and len(flist) > 1):
+            print("{0} can be expressed as {1} ^ {2}".format(s, flist[0], len(flist)))
+        else:
+            print("{0} cannot be expressed as x ^ y".format(s))
+
+def checkDivisibility(n, digit):
+
+    # If the digit divides the number then return true
+    # else return false.
+    return digit != 0 and n % digit == 0
+
+# Function to check if all digits of n divide
+# it or not
+def allDigitsDivide(n):
+    # Pythonic way
+    nlist = map(int, set(str(n)))
+    for digit in nlist:
+        if  not checkDivisibility(n, digit):
+            return False
+    return True
+    
+    
+    
+# Next File
+
+# -*- coding: utf-8 -*-
+import math
+
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def distance(self, point1):
+        return math.sqrt(((self.x - point1.x) ** 2) +
+                         ((self.y - point1.y) ** 2))
+
+    def distanceSquare(self, point):
+        return ((self.x - point.x) ** 2) + ((self.y - point.y) ** 2)
+
+
+def checkSquare(p1, p2, p3, p4):
+
+    return (checkSides(p1, p2, p3, p4) and checkDiagonals(p1, p2, p3, p4)
+            and checkRightAngles(p1, p2, p3, p4))
+
+
+def checkSides(p1, p2, p3, p4):
+    side = p1.distance(p2)
+    return (side == p2.distance(p3) and side == p3.distance(p4) and
+            side == p4.distance(p1))
+
+def checkDiagonals(p1, p2, p3, p4) :
+    return p1.distance(p3) == p2.distance(p4)
+
+def checkRightAngles(p1, p2, p3, p4):
+    return (p1.distanceSquare(p3) == 2 * p1.distanceSquare(p2)
+            and p2.distanceSquare(p4) == 2 * p1.distanceSquare(p2))
+
+# Driver program
+print("Yes" if checkSquare(Point(20, 10), Point(20, 20), Point(10, 20),
+                           Point(10, 10)) else "No")
+def is_prime(x):
+    if x == 1 or x == 2 :
+        return True
+    if x % 2 == 0 :
+        return False
+
+    for i in range(3, int(math.sqrt(x))+1, 2) :
+        if x % i == 0 :
+            return False
+    return True
+
+for i in range(100, 999) :
+    x = str(i) + "127"
+    if is_prime(int(x)) :
+        print(x)
+
