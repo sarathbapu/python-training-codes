@@ -24,7 +24,7 @@ class Point :
     Shortest distance between this point and new point
     '''
     def distance(self, point1) :
-        return math.sqrt(((self.x - point1.x) ** 2 )+((self.y - point1.y) ** 2))
+        return math.sqrt(self.distanceSquare(point1))
     '''
     Returns square of shortest distance between points
     '''
